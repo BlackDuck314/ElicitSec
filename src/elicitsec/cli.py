@@ -111,10 +111,11 @@ def run(suites: str = "suites",
 
 
 @app.command()
-def report(src: str = "results/local", out: str = "results/local/report.md",
+def report(from_: str = typer.Option("results/local", "--from"),
+           out: str = "results/local/report.md",
            target: str = "mock rig"):
     """Generate a Markdown report from run manifests."""
-    runs = load_runs(src)
+    runs = load_runs(from_)
     p = write_report(runs, out, target_name=target)
     typer.echo(f"wrote {p}")
 

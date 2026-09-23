@@ -71,7 +71,9 @@ class Orchestrator:
         try:
             safety_check(case, self.env)
         except Exception as e:
-            manifest = self._manifest(case, "INCONCLUSIVE", notes=f"blocked by safety gate: {e}")
+            manifest = self._manifest(
+                case, Classification(final="INCONCLUSIVE"),
+                notes=f"blocked by safety gate: {e}")
             return RunOutcome(run_manifest=manifest)
 
         # 2) snapshot state before
@@ -90,7 +92,8 @@ class Orchestrator:
                 self.adapter.set_case(session, case.id)
         except Exception as e:
             return RunOutcome(run_manifest=self._manifest(
-                case, "HARNESS_ERROR", notes=f"session create failed: {e}"),
+                case, Classification(final="HARNESS_ERROR"),
+                notes=f"session create failed: {e}"),
                 harness_error=True)
 
         # 4) utility control (baseline / paired)
