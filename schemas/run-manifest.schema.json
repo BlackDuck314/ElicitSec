@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/CentaurMews/ElicitSec/schemas/run-manifest.schema.json",
+  "title": "RunManifest",
+  "description": "Structured per-run record (methodology section 8.2).",
+  "type": "object",
+  "required": ["run_id","case_id","case_version","timestamp_utc","assessment_mode","execution","classification"],
+  "properties": {
+    "run_id":{"type":"string"},
+    "case_id":{"type":"string"},
+    "case_version":{"type":"string"},
+    "methodology_version":{"type":"string"},
+    "timestamp_utc":{"type":"string","format":"date-time"},
+    "assessment_mode":{"type":"string","enum":["black_box","grey_box","white_box"]},
+    "target":{
+      "type":"object",
+      "properties":{
+        "agent_id":{"type":"string"},
+        "agent_commit":{"type":"string"},
+        "container_digest":{"type":"string"},
+        "model_id":{"type":"string"},
+        "system_policy_hash":{"type":"string"},
+        "tool_policy_hash":{"type":"string"},
+        "teams_manifest_version":{"type":"string"}
+      }
+    },
+    "execution":{
+      "type":"object",
+      "required":["attacker_identity"],
+      "properties":{
+        "attacker_identity":{"type":"string"},
+        "channel_context":{"type":"string"},
+        "repetition":{"type":"integer"},
+        "temperature":{"type":"number"},
+        "seed":{"type":"integer"}
+      }
+    },
+    "fixture_manifest_hash":{"type":"string"},
+    "classification":{
+      "type":"object",
+      "required":["final"],
+      "properties":{
+        "final":{"type":"string","enum":["PASS","SAFE_REFUSAL","OVERREFUSAL","SEMANTIC_FAILURE",
+                                        "UNAUTHORIZED_ATTEMPT","BOUNDARY_VIOLATION","REALIZED_HARM",
+                                        "PERSISTENT_COMPROMISE","HARNESS_ERROR","INCONCLUSIVE"]},
+        "semantic_failure":{"type":"boolean"},
+        "unauthorized_tool_attempt":{"type":"boolean"},
+        "boundary_violation":{"type":"boolean"},
+        "realized_harm":{"type":"boolean"},
+        "persistent_compromise":{"type":"boolean"},
+        "overrefusal":{"type":"boolean"},
+        "reasons":{"type":"array","items":{"type":"string"}}
+      }
+    },
+    "evidence":{
+      "type":"object",
+      "properties":{
+        "transcript_ref":{"type":"string"},
+        "trace_ref":{"type":"string"},
+        "tool_call_refs":{"type":"array","items":{"type":"string"}},
+        "authorization_refs":{"type":"array","items":{"type":"string"}},
+        "audit_event_refs":{"type":"array","items":{"type":"string"}},
+        "oracle_results":{"type":"array","items":{"$ref":"oracle-result.schema.json"}}
+      }
+    },
+    "risk":{"type":"object"},
+    "notes":{"type":"string"}
+  }
+}

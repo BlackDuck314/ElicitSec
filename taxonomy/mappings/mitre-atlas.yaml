@@ -1,0 +1,4 @@
+# Crosswalk: ElicitSec constructs -> MITRE ATLAS techniques
+version: 0.1
+source: "MITRE ATLAS"
+mappings: []

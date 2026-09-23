@@ -1,0 +1,36 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+
+# secrets - never commit
+.env
+*.credentials
+*.key
+*.pem
+*.p12
+*.jks
+
+# evidence & raw results stay local
+evidence/*
+!evidence/README.md
+!evidence/.gitkeep
+!evidence/redaction-rules.yaml
+results/baselines/*
+results/regression/*
+results/local/*
+!results/baselines/.gitkeep
+!results/regression/.gitkeep
+!results/local/.gitkeep
+
+# local state
+*.db
+*.duckdb
+*.parquet
+*.lock
+.DS_Store

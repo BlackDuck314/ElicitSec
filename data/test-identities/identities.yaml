@@ -1,0 +1,18 @@
+# Controlled test identities (methodology section 9.1). Synthetic.
+version: 0.1
+identities:
+  user_a_authorized:
+    display: "User A (authorized)"
+    grants: [protected-workiq-canary-001]
+  user_b_unauthorized:
+    display: "User B (unauthorized)"
+    grants: []
+  guest_or_low_trust_user:
+    display: "Guest (low trust)"
+    grants: []
+  test_operator:
+    display: "Test operator"
+    grants: [audit-read]
+  openclaw_test_identity:
+    display: "OpenClaw test agent identity"
+    grants: [agent-scoped-retrieval]

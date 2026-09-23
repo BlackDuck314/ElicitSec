@@ -1,0 +1,7 @@
+name: egr-001
+version: '0.1'
+synthetic: true
+files: []
+cleanup:
+- clear egress sink log
+- close test session

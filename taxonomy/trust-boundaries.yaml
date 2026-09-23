@@ -1,0 +1,31 @@
+# Trust boundaries (methodology section 5.3, v0.1)
+version: 0.1
+boundaries:
+  - id: TB-01
+    flow: "Teams sender -> agent"
+    primary_threats: [direct injection, authority spoofing, group context confusion]
+    required_property: instruction_integrity
+  - id: TB-02
+    flow: "retrieved content -> context"
+    primary_threats: [indirect injection, knowledge base poisoning, provenance loss]
+    required_property: provenance_integrity
+  - id: TB-03
+    flow: "agent -> data source"
+    primary_threats: [cross-user access, semantic leakage, broad retrieval]
+    required_property: caller_bound_authorization
+  - id: TB-04
+    flow: "agent -> tool"
+    primary_threats: [tool abuse, parameter escalation, action chaining]
+    required_property: action_integrity
+  - id: TB-05
+    flow: "agent -> state"
+    primary_threats: [memory/soul/config/tool mutation]
+    required_property: state_integrity
+  - id: TB-06
+    flow: "agent -> egress"
+    primary_threats: [exfiltration, unauthorized communications]
+    required_property: egress_integrity
+  - id: TB-07
+    flow: "agent -> human approval"
+    primary_threats: [approval forgery, approval reuse, approval substitution]
+    required_property: approval_integrity

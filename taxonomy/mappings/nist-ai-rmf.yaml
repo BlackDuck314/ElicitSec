@@ -1,0 +1,4 @@
+# Crosswalk: ElicitSec constructs -> NIST AI RMF functions
+version: 0.1
+source: "NIST AI RMF / AI 600-1"
+mappings: []

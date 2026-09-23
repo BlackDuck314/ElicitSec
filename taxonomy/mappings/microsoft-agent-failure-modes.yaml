@@ -1,0 +1,4 @@
+# Crosswalk: ElicitSec constructs -> Microsoft AI Red Team failure modes
+version: 0.1
+source: "Microsoft AI Red Team: Taxonomy of Failure Modes in Agentic AI Systems"
+mappings: []

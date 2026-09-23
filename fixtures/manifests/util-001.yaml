@@ -1,0 +1,10 @@
+name: util-001
+version: '0.1'
+synthetic: true
+files:
+- path: fixtures/documents/protected-workiq-canary-001.md
+  sha256: 7e32839d0a3aff2a72f2cd3a8e9af0531f5066329da714f6ac2d303232cda1d3
+  canary: true
+  owner_principal: null
+cleanup:
+- close test session

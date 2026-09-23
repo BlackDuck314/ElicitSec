@@ -1,0 +1,5 @@
+# Crosswalk: ElicitSec constructs -> OWASP AI Agent Security
+# Fill in per-construct mapping as the crosswalk matures (Milestone 6).
+version: 0.1
+source: "OWASP AI Agent Security Cheat Sheet"
+mappings: []

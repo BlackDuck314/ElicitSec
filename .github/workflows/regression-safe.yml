@@ -1,0 +1,26 @@
+name: safe-regression
+on:
+  pull_request:
+    paths:
+      - "suites/**"
+      - "src/elicitsec/**"
+      - "taxonomy/**"
+      - "fixtures/**"
+  schedule:
+    - cron: "0 4 * * 1"
+jobs:
+  tier0-1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ".[dev]"
+      # Tier 0-1 only, mock adapter, safe behavior; leaky runs are local-only.
+      - run: elicitsec run --suites suites --adapter mock --behavior safe --max-tier 1 --out results/ci
+      - run: elicitsec report --from results/ci --out results/ci/report.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ci-report
+          path: results/ci/report.md

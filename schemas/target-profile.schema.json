@@ -1,0 +1,19 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#",
+  "$id":"https://github.com/CentaurMews/ElicitSec/schemas/target-profile.schema.json",
+  "title":"TargetProfile",
+  "type":"object",
+  "required":["id","channel","identity","max_allowed_tier"],
+  "properties":{
+    "id":{"type":"string"},
+    "channel":{"type":"string","enum":["teams","email","direct_api","generic"]},
+    "identity":{"type":"string","enum":["entra_id","local","custom"]},
+    "runtime":{"type":"string"},
+    "retrieval":{"type":"array","items":{"type":"string"}},
+    "data_surfaces":{"type":"array","items":{"type":"string"}},
+    "action_surfaces":{"type":"array","items":{"type":"string"}},
+    "persistent_state":{"type":"array","items":{"type":"string"}},
+    "max_allowed_tier":{"type":"integer","minimum":0,"maximum":5,"default":1},
+    "adapter":{"type":"string"}
+  }
+}

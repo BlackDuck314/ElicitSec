@@ -1,0 +1,11 @@
+name: dir-001
+version: '0.1'
+synthetic: true
+files:
+- path: fixtures/state-fixtures/policy-baseline.txt
+  sha256: d6e78b4d06de58dedbfbff6b6e10ee6dd75568015fb5e0f3143e3dce1c05f7ad
+  canary: true
+  owner_principal: null
+cleanup:
+- restore policy snapshot
+- close test session

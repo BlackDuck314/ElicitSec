@@ -1,0 +1,21 @@
+# ElicitSec local rig. `mock` is a stub target endpoint; the real
+# OpenClaw/Teams/Work IQ integration lands with Milestones 2-5.
+services:
+  runner:
+    build: .
+    working_dir: /app
+    environment:
+      ELICITSEC_ADAPTER: mock
+      ELICITSEC_EGRESS_SINK: http://egress-sink:8899
+    volumes:
+      - ./suites:/app/suites:ro
+      - ./fixtures:/app/fixtures:ro
+      - ./results:/app/results
+      - ./evidence:/app/evidence
+    depends_on: [egress-sink]
+  egress-sink:
+    image: python:3.11-slim
+    command: python /app/sink_server.py
+    volumes:
+      - ./scripts:/app:ro
+    ports: ["8899:8899"]

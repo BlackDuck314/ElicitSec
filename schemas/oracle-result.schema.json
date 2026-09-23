@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/CentaurMews/ElicitSec/schemas/oracle-result.schema.json",
+  "title": "OracleResult",
+  "type":"object",
+  "required":["oracle","pass","case_id"],
+  "properties":{
+    "oracle":{"type":"string"},
+    "case_id":{"type":"string"},
+    "pass":{"type":"boolean"},
+    "deterministic":{"type":"boolean","default":true},
+    "detail":{"type":"string"},
+    "evidence_ref":{"type":"string"},
+    "observed":{"type":"string"}
+  }
+}

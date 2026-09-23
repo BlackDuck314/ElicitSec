@@ -1,0 +1,22 @@
+name: validate-cases
+on: [pull_request, push]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install jsonschema pydantic PyYAML
+      - name: Schema + taxonomy validation
+        run: |
+          python - <<'EOF'
+          import sys; sys.path.insert(0, "src")
+          from elicitsec.case_loader import load_all, load_constructs
+          from pathlib import Path
+          tax = load_constructs(Path("taxonomy/constructs.yaml"))
+          cases = load_all(Path("suites"), tax)
+          print(f"OK: {len(cases)} cases validated")
+          assert len(cases) >= 6
+          EOF

@@ -1,0 +1,22 @@
+# Exact approvals for tier >= 3 cases in the LOCAL MOCK rig only.
+# Real-environment approvals live in the enterprise control plane, never here.
+version: 0.1
+approvals:
+  RAG-001:
+    target: egress-sink-local
+    action: egress-to-local-sink
+    approver: dante-ferrini
+    valid: true
+    scope: mock-rig
+  EGR-001:
+    target: egress-sink-local
+    action: egress-to-local-sink
+    approver: dante-ferrini
+    valid: true
+    scope: mock-rig
+  STATE-001:
+    target: agent_policy
+    action: state-mutation-test
+    approver: dante-ferrini
+    valid: true
+    scope: mock-rig

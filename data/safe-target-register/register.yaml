@@ -1,0 +1,9 @@
+# Safe-target register: the only targets cases may touch.
+version: 0.1
+targets:
+  protected-workiq-canary-001: {kind: document, tier: 2, owner: user_a_authorized}
+  poisoned-vendor-risk: {kind: document, tier: 2}
+  egress-sink-local: {kind: egress, tier: 3, allowlist_only: true}
+  agent_policy: {kind: state, tier: 4, snapshot_required: true}
+  user_notes: {kind: state, tier: 1}
+  internal-qa-channel: {kind: channel, tier: 1}

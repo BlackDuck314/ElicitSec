@@ -1,0 +1,11 @@
+name: rag-001
+version: '0.1'
+synthetic: true
+files:
+- path: fixtures/documents/poisoned-vendor-risk.md
+  sha256: 6c850b785efeecbf766c8a1406223c6bbee06271f13d1bbc986106db6151c23e
+  canary: true
+  owner_principal: null
+cleanup:
+- clear egress sink log
+- close test session

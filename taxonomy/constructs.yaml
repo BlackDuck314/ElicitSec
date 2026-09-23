@@ -1,0 +1,118 @@
+# Threat constructs (methodology section 3.3, v0.1)
+version: 0.1
+methodology: 0.1
+constructs:
+  # --- Objective / intent attacks ---
+  - id: OBJ-01
+    family: objective
+    name: Instruction override
+    description: Attacker text attempts to supersede policy or task constraints.
+  - id: OBJ-02
+    family: objective
+    name: Intent displacement
+    description: A legitimate task is replaced by an attacker objective.
+  - id: OBJ-03
+    family: objective
+    name: Authority displacement
+    description: Agent accepts unverified claims of administrative/security authority.
+  - id: OBJ-04
+    family: objective
+    name: Approval substitution
+    description: Text is treated as equivalent to verified approval.
+  # --- Injection contexts ---
+  - id: CTX-01
+    family: context
+    name: Direct prompt injection
+    description: Attacker instructions arrive directly from chat input.
+  - id: CTX-02
+    family: context
+    name: Indirect prompt injection
+    description: Attacker instructions arrive via retrieved data.
+  - id: CTX-03
+    family: context
+    name: Tool-return injection
+    description: API/search/tool output steers subsequent behavior.
+  - id: CTX-04
+    family: context
+    name: Email-mediated injection
+    description: Subject, body, attachment, calendar, or thread content influences the agent.
+  - id: CTX-05
+    family: context
+    name: Memory poisoning
+    description: Attacker content becomes future agent context.
+  - id: CTX-06
+    family: context
+    name: Provenance laundering
+    description: Untrusted content appears in a more trusted-looking channel or artifact.
+  - id: CTX-07
+    family: context
+    name: Multi-turn shaping
+    description: Gradual escalation and commitment over multiple turns.
+  # --- Capability / authorization boundary attacks ---
+  - id: CAP-01
+    family: capability
+    name: Caller-agent authorization confusion
+    description: Agent authority is used instead of caller authority.
+  - id: CAP-02
+    family: capability
+    name: Confused deputy
+    description: Low-privilege caller obtains action/data via privileged agent identity.
+  - id: CAP-03
+    family: capability
+    name: Cross-principal data access
+    description: One user obtains another user's data, metadata, or derived facts.
+  - id: CAP-04
+    family: capability
+    name: Scope escalation
+    description: Agent enumerates or accesses resources outside assigned scope.
+  - id: CAP-05
+    family: capability
+    name: Tool overreach
+    description: Tool action/parameters/targets exceed policy.
+  - id: CAP-06
+    family: capability
+    name: Identity or token misbinding
+    description: Wrong user/group/session identity is applied.
+  # --- State attacks ---
+  - id: STATE-01
+    family: state
+    name: Persistent instruction modification
+    description: Policy/soul/system-like instructions become attacker-controlled.
+  - id: STATE-02
+    family: state
+    name: Memory persistence poisoning
+    description: Durable memory changes future behavior.
+  - id: STATE-03
+    family: state
+    name: Tool/policy mutation
+    description: Tool definitions, skills, routing, guardrails, or policy change.
+  - id: STATE-04
+    family: state
+    name: Configuration integrity violation
+    description: Runtime/deployment/configuration state changes.
+  # --- Chain / approval-integrity attacks ---
+  - id: CHAIN-01
+    family: chain
+    name: Excessive agency
+    description: Agent performs an unnecessarily broad action chain.
+  - id: CHAIN-02
+    family: chain
+    name: Approval integrity failure
+    description: Approval is forged, reused, broadened, or parameter-swapped.
+  # --- Data harms ---
+  - id: DATA-01
+    family: data
+    name: Protected-content disclosure
+    description: Sensitive resource contents are returned.
+  - id: DATA-02
+    family: data
+    name: Metadata leakage
+    description: Title, existence, source, snippet, count, path, or citation leaks.
+  - id: DATA-03
+    family: data
+    name: Transformation leakage
+    description: Summary, translation, encoding, partial reveal, or oracle leakage.
+  - id: DATA-04
+    family: data
+    name: Outbound exfiltration
+    description: Data reaches an unapproved egress destination.

@@ -1,0 +1,11 @@
+# Local deterministic rig target profile (mock adapter).
+id: openclaw-local-mock
+channel: direct_api
+identity: local
+runtime: mock
+retrieval: []
+data_surfaces: []
+action_surfaces: []
+persistent_state: []
+max_allowed_tier: 4
+adapter: mock

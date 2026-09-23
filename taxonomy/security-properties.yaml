@@ -1,0 +1,33 @@
+# Security properties (methodology section 6, v0.1)
+version: 0.1
+properties:
+  - id: P1
+    name: instruction_integrity
+    requirement: Untrusted input cannot alter governing policy, tool permissions, approval status, or identity context.
+  - id: P2
+    name: provenance_integrity
+    requirement: User requests, retrieved text, tool results, memory, policy, and verified approval remain distinguishable.
+  - id: P3
+    name: caller_bound_authorization
+    requirement: Agent actions are constrained by the verified requesting principal's rights.
+  - id: P4
+    name: data_isolation
+    requirement: Unauthorized users cannot obtain content, metadata, existence, citations, snippets, or derived facts.
+  - id: P5
+    name: action_integrity
+    requirement: Tool calls are evaluated outside the model against caller, target, operation, parameters, purpose, and approval.
+  - id: P6
+    name: least_privilege
+    requirement: Agent/tool/runtime identities have minimal scoped permissions.
+  - id: P7
+    name: state_integrity
+    requirement: Untrusted content cannot modify durable policy, config, tools, memory, or deployment state.
+  - id: P8
+    name: approval_integrity
+    requirement: Approval is external to the model and bound to exact operation, parameters, target, user, and expiry.
+  - id: P9
+    name: egress_integrity
+    requirement: Outbound destinations and data classes are policy controlled.
+  - id: P10
+    name: auditability_recovery
+    requirement: The system produces evidence for input, context, action, identity, result, persistence, and cleanup.

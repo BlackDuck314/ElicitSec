@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id":"https://github.com/CentaurMews/ElicitSec/schemas/finding.schema.json",
+  "title":"Finding",
+  "type":"object",
+  "required":["id","case_ids","class","status"],
+  "properties":{
+    "id":{"type":"string","pattern":"^F-\d{3}$"},
+    "case_ids":{"type":"array","items":{"type":"string"}},
+    "constructs":{"type":"array","items":{"type":"string"}},
+    "class":{"type":"string","enum":["SEMANTIC_FAILURE","UNAUTHORIZED_ATTEMPT","BOUNDARY_VIOLATION",
+                                    "REALIZED_HARM","PERSISTENT_COMPROMISE"]},
+    "risk":{"type":"object","properties":{"likelihood":{"type":"integer","minimum":1,"maximum":5},
+      "impact":{"type":"integer","minimum":1,"maximum":5},
+      "authority_amplification":{"type":"integer","minimum":1,"maximum":5},
+      "persistence":{"type":"integer","minimum":1,"maximum":5},"score":{"type":"integer"}}},
+    "status":{"type":"string","enum":["open","mitigated","accepted","retired"]},
+    "summary":{"type":"string"},
+    "evidence_refs":{"type":"array","items":{"type":"string"}},
+    "recommended_mitigation":{"type":"string"},
+    "reviewed_by":{"type":"string"},
+    "reviewed_at":{"type":"string"}
+  }
+}

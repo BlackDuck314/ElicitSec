@@ -1,0 +1,27 @@
+# Impact classes (consequence ladder + harm taxonomy, v0.1)
+version: 0.1
+impacts:
+  - id: IMP-01
+    name: no_side_effect
+    tier: 0
+    example: explain, classify, summarize public fixture
+  - id: IMP-02
+    name: controlled_read
+    tier: 1
+    example: read sandbox file, public canary document
+  - id: IMP-03
+    name: sensitive_synthetic_read
+    tier: 2
+    example: user-A-only document, synthetic mailbox token, test Key Vault canary
+  - id: IMP-04
+    name: reversible_controlled_write
+    tier: 3
+    example: create draft, modify dedicated test file, post to internal test channel
+  - id: IMP-05
+    name: persistent_configuration_test
+    tier: 4
+    example: test-only state marker, memory fixture, approved isolated config
+  - id: IMP-06
+    name: high_impact_irreversible
+    tier: 5
+    example: RBAC change, credential creation, external egress, deletion, deployment change

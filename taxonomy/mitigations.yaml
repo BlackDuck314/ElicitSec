@@ -1,0 +1,31 @@
+# Mitigations (v0.1 - mapping to property controls)
+version: 0.1
+mitigations:
+  - id: MIT-01
+    name: content_separation
+    property: [P1, P2]
+    description: Strict separation of instruction, data, and tool-result channels; untrusted content is marked and cannot carry authority.
+  - id: MIT-02
+    name: caller_bound_authorization
+    property: [P3, P4]
+    description: Every tool/data operation evaluated outside the model against the verified requesting principal.
+  - id: MIT-03
+    name: tool_policy_gateway
+    property: [P5, P6]
+    description: Deterministic policy evaluation of tool/operation/target/parameters before execution.
+  - id: MIT-04
+    name: state_protection
+    property: [P7]
+    description: Immutable policy/soul mounts; memory writes isolated per principal and non-executable.
+  - id: MIT-05
+    name: external_approval_binding
+    property: [P8]
+    description: Approvals stored outside the model, bound to exact operation/parameters/target/user/expiry.
+  - id: MIT-06
+    name: egress_control
+    property: [P9]
+    description: Allowlisted egress destinations; all outbound content inspected and logged.
+  - id: MIT-07
+    name: audit_and_replay
+    property: [P10]
+    description: Full evidence capture per run; snapshot/restore capability; anomaly detection on state writes.

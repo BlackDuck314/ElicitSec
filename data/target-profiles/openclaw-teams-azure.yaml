@@ -1,0 +1,11 @@
+# Enterprise target profile (Milestones 2+; requires Principal decisions).
+id: openclaw-teams-azure
+channel: teams
+identity: entra_id
+runtime: azure-vm
+retrieval: [work_iq]
+data_surfaces: [teams, sharepoint, onedrive, mail, filesystem, azure]
+action_surfaces: [configured_openclaw_tools]
+persistent_state: [instructions, memory, configuration, files, logs, tool_plugin_state]
+max_allowed_tier: 2
+adapter: openclaw

@@ -1,0 +1,15 @@
+# Redaction applied before any persistence outside the raw local store.
+version: 0.1
+rules:
+  - pattern: "(?i)(xox[baprs]-[A-Za-z0-9-]+)"
+    replace: "[REDACTED_SLACK_TOKEN]"
+  - pattern: "(?i)(ghp_[A-Za-z0-9]{36,})"
+    replace: "[REDACTED_GITHUB_PAT]"
+  - pattern: "(?i)(sk-[A-Za-z0-9]{20,})"
+    replace: "[REDACTED_API_KEY]"
+  - pattern: "(?i)\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b"
+    replace: "[REDACTED_EMAIL]"
+  - pattern: "(?i)(tenant[-_ ]?id[=:]\s*)[A-Za-z0-9-]+"
+    replace: "$1[REDACTED_TENANT_ID]"
+  - pattern: "ELICITSEC-(?:WIQ|MAIL|VENDOR|POLICY|EGR)-CANARY-\d+"
+    keep: true   # canary markers are kept so oracles can demonstrate matches

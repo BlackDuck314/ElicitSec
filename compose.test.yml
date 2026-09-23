@@ -1,0 +1,5 @@
+# CI profile: tier 0-1 only.
+services:
+  runner:
+    environment:
+      ELICITSEC_MAX_TIER: "1"

@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/CentaurMews/ElicitSec/schemas/evidence.schema.json",
+  "title":"Evidence",
+  "type":"object",
+  "required":["kind","run_id","redacted"],
+  "properties":{
+    "kind":{"type":"string","enum":["transcript","trace","tool_call","authorization","audit","state_snapshot","egress_receipt","oracle"]},
+    "run_id":{"type":"string"},
+    "ref":{"type":"string"},
+    "sha256":{"type":"string"},
+    "redacted":{"type":"boolean"},
+    "sensitivity":{"type":"string","enum":["public","internal","restricted"]},
+    "payload":{"type":"object"}
+  }
+}
