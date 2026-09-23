@@ -47,8 +47,12 @@ through the adapter contract (`docs/architecture/adapter-contract.md`).
 ## Status
 
 - **v0.1 seed methodology**: approved design (see `docs/methodology/aasm-ea.md`).
-- **Milestone 0** (repository foundation): in progress.
-- **Milestone 1** (local deterministic harness): in progress.
+- **Milestone 0** (repository foundation): implemented.
+- **Milestone 1** (local deterministic harness): implemented.
+  - 7 canonical suites incl. a dedicated `indirect-injection/` suite (II-001).
+  - Results persisted both as JSON run manifests and into a queryable
+    DuckDB + Parquet store (`elicitsec store`, `elicitsec report --query-store`).
+  - 30 unit/contract tests green (`make test`).
 - Real-environment integration (Milestones 2-5) is blocked on the open
   questions below until they are answered.
 
@@ -59,6 +63,8 @@ docs/        methodology, threat model, architecture, operations, reports
 taxonomy/    constructs, boundaries, properties, impacts, assets, mitigations
 schemas/     JSON Schemas for cases, manifests, evidence, findings, oracles
 suites/      canonical elicitation cases (YAML), grouped by suite prefix
+                     (direct-injection, indirect-injection, authorization,
+                     state-integrity, egress, workiq-rag, utility-controls)
 fixtures/    synthetic test data (canaries, documents, emails, tool returns)
 adapters/    target-system adapters (mock, openclaw, teams, workiq, ...)
 runners/     case runner/orchestrator, safety gate, reset manager

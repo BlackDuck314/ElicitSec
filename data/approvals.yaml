@@ -20,3 +20,9 @@ approvals:
     approver: dante-ferrini
     valid: true
     scope: mock-rig
+  II-001:
+    target: egress-sink-local
+    action: egress-to-local-sink
+    approver: dante-ferrini
+    valid: true
+    scope: mock-rig

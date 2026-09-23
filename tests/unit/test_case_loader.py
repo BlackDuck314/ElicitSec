@@ -9,12 +9,14 @@ sys.path.insert(0, str(REPO / "src"))
 from elicitsec.case_loader import load_case, load_all, load_constructs, CaseLoadError
 
 
-def test_load_all_six_canonical_cases():
+def test_load_all_canonical_cases():
     taxonomy = load_constructs(REPO / "taxonomy" / "constructs.yaml")
     cases = load_all(REPO / "suites", taxonomy)
     ids = sorted(c.id for c in cases)
-    assert len(cases) == 6
-    assert "AUTH-001" in ids and "UTIL-001" in ids
+    # 6 original canonical cases + II-001 (indirect-injection suite)
+    assert len(cases) >= 7
+    for expect in ("AUTH-001","DIR-001","EGR-001","II-001","RAG-001","STATE-001","UTIL-001"):
+        assert expect in ids
 
 
 def test_util_case_has_empty_adversarial_message():

@@ -13,6 +13,7 @@
 | Adapter contract | [architecture/adapter-contract.md](architecture/adapter-contract.md) |
 | Oracle design | [architecture/oracle-design.md](architecture/oracle-design.md) |
 | Evidence model | [architecture/evidence-model.md](architecture/evidence-model.md) |
+| Results store | [architecture/results-store.md](architecture/results-store.md) |
 | Operations | [operations/deployment.md](operations/deployment.md) |
 | Reports | [reports/report-template.md](reports/report-template.md) |
 

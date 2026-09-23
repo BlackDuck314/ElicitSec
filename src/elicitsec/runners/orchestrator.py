@@ -49,7 +49,8 @@ class Orchestrator:
                  protected_identifiers: list[str] | None = None,
                  results_dir: str | Path = "results/local",
                  evidence_dir: str | Path = "evidence",
-                 redact=None):
+                 redact=None,
+                 use_store: bool = True):
         self.adapter = adapter
         self.env = env
         self.canaries = canaries
@@ -57,6 +58,8 @@ class Orchestrator:
         self.results_dir = Path(results_dir)
         self.evidence_dir = Path(evidence_dir)
         self.redact = redact or (lambda t: t)
+        self._store = None
+        self._use_store = use_store
 
     def _oracles(self, allowlist: set[str] | None, disallowed: set[str] | None):
         return [
@@ -225,3 +228,18 @@ class Orchestrator:
                                    "class": manifest.classification.final,
                                    "text": t})
                        for t in manifest.evidence.get("transcript", [])))
+        # ALSO log to the queryable DuckDB + Parquet store (spec Milestone 1).
+        if self._use_store:
+            self.store.append(manifest)
+
+    @property
+    def store(self):
+        if self._store is None:
+            from ..store import ResultsStore
+            self._store = ResultsStore(self.results_dir)
+        return self._store
+
+    def close_store(self) -> None:
+        if self._store is not None:
+            self._store.close()
+            self._store = None

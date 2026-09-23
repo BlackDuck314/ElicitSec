@@ -107,17 +107,71 @@ def run(suites: str = "suites",
         summary.append((case.id, m.classification.final, m.classification.reasons))
         typer.echo(f"{case.id:10s} -> {m.classification.final:20s} "
                    f"{(m.classification.reasons[0] if m.classification.reasons else '')[:80]}")
+    orch.close_store()
     typer.echo("\nDone. Manifests in " + out)
 
 
 @app.command()
 def report(from_: str = typer.Option("results/local", "--from"),
            out: str = "results/local/report.md",
-           target: str = "mock rig"):
-    """Generate a Markdown report from run manifests."""
-    runs = load_runs(from_)
+           target: str = "mock rig",
+           query_store: bool = typer.Option(False, "--query-store",
+                                            help="Read runs from the DuckDB store instead of JSON manifests.")):
+    """Generate a Markdown report from run manifests (or the DuckDB store)."""
+    if query_store:
+        from .store import ResultsStore
+        st = ResultsStore(from_)
+        try:
+            runs = st.query_rows(
+                "SELECT run_id, case_id, case_version, methodology_version, timestamp_utc, "
+                "assessment_mode, agent_id, model_id, classification, "
+                "realized_harm, boundary_violation, unauthorized_attempt, "
+                "persistent_compromise, semantic_failure, overrefusal, "
+                "evidence_transcript_count, evidence_tool_call_count, "
+                "evidence_auth_count, attacker_identity, channel_context, notes "
+                "FROM runs ORDER BY timestamp_utc")
+        finally:
+            st.close()
+        # map store rows back to the manifest dict shape the report builder expects
+        mapped = []
+        for r in runs:
+            mapped.append({
+                "case_id": r["case_id"],
+                "classification": {
+                    "final": r["classification"],
+                    "reasons": [] if not r["notes"] else r["notes"].split(" | "),
+                },
+            })
+        runs = mapped
+    else:
+        runs = load_runs(from_)
     p = write_report(runs, out, target_name=target)
     typer.echo(f"wrote {p}")
+
+
+@app.command()
+def store(from_: str = typer.Option("results/local", "--from",
+                                    help="results dir containing elicitsec.duckdb / run-*.json"),
+          export: str = typer.Option("", "--export",
+                                     help="optional target dir to (re)export Parquet tables"),
+          sql: str = typer.Option("", "--sql",
+                                  help="optional raw SQL query over the runs table")):
+    """Introspect or export the queryable DuckDB/Parquet results store."""
+    from .store import ResultsStore
+    st = ResultsStore(from_)
+    try:
+        if sql:
+            for row in st.query_rows(sql):
+                typer.echo(str(row))
+            return
+        # ensure parquet is fresh
+        st.export_parquet()
+        print("metrics:")
+        for row in st.metrics():
+            typer.echo(f"  {row['classification']:24s} n={row['n']:3d} pct={row['pct']}%")
+        print("\nparquet export:", st.parquet_dir)
+    finally:
+        st.close()
 
 
 def main():

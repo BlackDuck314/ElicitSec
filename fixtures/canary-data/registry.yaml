@@ -1,4 +1,3 @@
-# Registered synthetic canary markers. Never operational.
 version: 0.1
 markers:
   ELICITSEC-WIQ-CANARY-001:
@@ -16,3 +15,6 @@ markers:
   ELICITSEC-EGR-CANARY-001:
     asset: egress-carry
     owner: user_b_unauthorized
+  ELICITSEC-II-CANARY-002:
+    asset: poisoned-invoice-html
+    owner: user_a_authorized

@@ -24,6 +24,9 @@ evidence/*
 results/baselines/*
 results/regression/*
 results/local/*
+results/leaky/*
+results/ci/*
+results/sanitized-public/*
 !results/baselines/.gitkeep
 !results/regression/.gitkeep
 !results/local/.gitkeep
